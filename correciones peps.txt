@@ -1,0 +1,80 @@
+=IIf(Fields!Nro_Fila.Value = 1, 
+    0, 
+    IIf(Fields!VALIDACION.Value = 2 Or Fields!VALIDACION.Value = 3 Or Fields!VALIDACION.Value = 4, 
+        Fields!STOCK.Value - Fields!CANT_CARDEX.Value, 
+        IIf(Fields!VALIDACION.Value = 1, 
+            IIf(Previous(ReportItems!RESTAN.Value) = 0, 
+                0, 
+                IIf(Previous(ReportItems!RESTAN.Value) > 0, 
+                    Previous(ReportItems!RESTAN.Value) - ReportItems!CONTABILIZAR.Value, 
+                    0)), 
+            "TBD")))
+
+The value expression for the textrun 'Contabilizar.Paragraphs[0].TextRuns[0]'uses an aggregate function on a report item. Aggregate functions can be used only on report item contained in page headers and footers
+--contabilizar
+=IIf(Fields!Nro_Fila.Value = 1, 
+    IIf(Fields!VALIDACION.Value = 2 Or Fields!VALIDACION.Value = 3 Or Fields!VALIDACION.Value = 4, 
+        Fields!CANT_CARDEX.Value, 
+        IIf(Fields!VALIDACION.Value = 1, 
+            IIf(Fields!DOCUMENTO.Value = Previous(Fields!DOCUMENTO.Value), 
+                0, 
+                IIf(Previous(ReportItems!RESTAN.Value) > 0, 
+                    IIf(ReportItems!RESTAN.Value < 0, Fields!CANT_CARDEX.Value + ReportItems!RESTAN.Value, Fields!CANT_CARDEX.Value), 
+                    0)), 
+            "TBD")),
+    IIf(Fields!VALIDACION.Value = 2 Or Fields!VALIDACION.Value = 3 Or Fields!VALIDACION.Value = 4, 
+        IIf(Fields!CANT_CARDEX.Value <= Fields!STOCK.Value, Fields!CANT_CARDEX.Value, Fields!STOCK.Value), 
+        IIf(Fields!VALIDACION.Value = 1, 
+            IIf(Fields!DOCUMENTO.Value = Previous(Fields!DOCUMENTO.Value) And Fields!NRO_LINEA.Value = Previous(Fields!NRO_LINEA.Value), 
+                0, 
+                 IIf(Previous(ReportItems!RESTAN.Value) > 0, 
+                    IIf(Fields!CANT_CARDEX.Value > ReportItems!RESTAN.Value, ReportItems!RESTAN.Value, Fields!CANT_CARDEX.Value), 
+                    0)), 
+            "TBD")))
+
+--restan dividido
+=IIf(Fields!VALIDACION.Value = 1, 
+        IIf(Previous(ReportItems!rest.Value) = 0, 
+            0, 
+            IIf(Previous(ReportItems!rest.Value) > 0, 
+                Previous(ReportItems!rest.Value) - ReportItems!CONTABILIZAR.Value, 
+                0)), 
+        "TBD")
+parte2
+=IIf(Fields!VALIDACION.Value = 2 Or Fields!VALIDACION.Value = 3 Or Fields!VALIDACION.Value = 4, 
+        Fields!STOCK.Value - Fields!CANT_CARDEX.Value,0)
+
+codigo de contabilizar con #error
+=IIf(Fields!Nro_Fila.Value = 1, 
+    IIf(Fields!VALIDACION.Value = 2 Or Fields!VALIDACION.Value = 3 Or Fields!VALIDACION.Value = 4, 
+        Fields!CANT_CARDEX.Value, 
+        IIf(Fields!VALIDACION.Value = 1, 
+            IIf(Fields!DOCUMENTO.Value = Previous(Fields!DOCUMENTO.Value), 
+                0, 
+                IIf(ReportItems!RESTAN.Value > 0, 
+                    IIf(ReportItems!RESTAN.Value < 0, Fields!CANT_CARDEX.Value + ReportItems!RESTAN.Value, Fields!CANT_CARDEX.Value), 
+                    0)), 
+            "TBD")),
+    IIf(Fields!VALIDACION.Value = 2 Or Fields!VALIDACION.Value = 3 Or Fields!VALIDACION.Value = 4, 
+        IIf(Fields!CANT_CARDEX.Value <= Fields!STOCK.Value, Fields!CANT_CARDEX.Value, Fields!STOCK.Value), 
+        IIf(Fields!VALIDACION.Value = 1, 
+            IIf(Fields!DOCUMENTO.Value = Previous(Fields!DOCUMENTO.Value) And Fields!NRO_LINEA.Value = Previous(Fields!NRO_LINEA.Value), 
+                0, 
+                 IIf(ReportItems!RESTAN.Value > 0, 
+                    IIf(Fields!CANT_CARDEX.Value > ReportItems!RESTAN.Value, ReportItems!RESTAN.Value, Fields!CANT_CARDEX.Value), 
+                    0)), 
+            "TBD")))
+
+restan completo con #error
+=IIf(Fields!VALIDACION.Value = 2 Or Fields!VALIDACION.Value = 3 Or Fields!VALIDACION.Value = 4, 
+        Fields!STOCK.Value - Fields!CANT_CARDEX.Value, 
+        IIf(Fields!VALIDACION.Value = 1, 
+            IIf(ReportItems!RESTAN.Value = 0, 
+                0, 
+                IIf(ReportItems!RESTAN.Value > 0, 
+                    ReportItems!RESTAN.Value - ReportItems!CONTABILIZAR.Value, 
+                    0)), 
+            "TBD"))
+
+
+

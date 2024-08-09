@@ -1,0 +1,9 @@
+Codigo para filtrar peridoso:
+
+Periodo 1:
+="Periodo 1 - " + UCase(MonthName(IIf((Parameters!MesInicioFiscal.Value + 0) <= 12, Parameters!MesInicioFiscal.Value + 0, (Parameters!MesInicioFiscal.Value + 0) - 12)))
+
+Periodo 2:
+="Periodo 2 - " + UCase(MonthName(IIf((Parameters!MesInicioFiscal.Value + 1) <= 12, Parameters!MesInicioFiscal.Value + 1, (Parameters!MesInicioFiscal.Value + 1) - 12)))
+
+debemos cambiar solamente los value por cada periodo que queramos empezando por "0" como el primero "1" para el segundo y asi sucesivamente por cada periodo que necesitemos agregar

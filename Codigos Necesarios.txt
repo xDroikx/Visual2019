@@ -1,0 +1,5 @@
+--Codigo para suma total
+=SUM(Fields!VALOR.Value, "OC")
+
+--Codigo para visibilidad
+=IIF(Fields!OC.Value = Previous(Fields!OC.Value), True, False)
